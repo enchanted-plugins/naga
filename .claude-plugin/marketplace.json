@@ -1,0 +1,54 @@
+{
+  "name": "naga",
+  "owner": {
+    "name": "enchanted-plugins"
+  },
+  "metadata": {
+    "description": "Observes an existing artifact's structural and stylistic fingerprint and generates new artifacts that match the observed shape, vocabulary, and naming idiom.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "full",
+      "source": "./plugins/full",
+      "description": "Meta-plugin. One install pulls in all six Naga sub-plugins via dependency resolution.",
+      "category": "meta"
+    },
+    {
+      "name": "naga-observe",
+      "source": "./plugins/naga-observe",
+      "description": "Extracts the pattern fingerprint from a source artifact via N1 AST + N2 TF-IDF. Persists to state/patterns/<hash>.json. No generation.",
+      "category": "executor"
+    },
+    {
+      "name": "naga-shift",
+      "source": "./plugins/naga-shift",
+      "description": "Generates a target artifact matching the source-pattern fingerprint via N1+N2+N3+N4 with N5 per-class threshold gating.",
+      "category": "executor"
+    },
+    {
+      "name": "naga-validate",
+      "source": "./plugins/naga-validate",
+      "description": "Scores fidelity of a generated output against a source pattern via N1 + N4 with bootstrap 95% CI and sample count N.",
+      "category": "validator"
+    },
+    {
+      "name": "naga-cross-repo",
+      "source": "./plugins/naga-cross-repo",
+      "description": "Cross-repo pattern replication with sibling-repo path resolution. Wraps /naga:match for remote source and target trees.",
+      "category": "executor"
+    },
+    {
+      "name": "naga-fingerprint",
+      "source": "./plugins/naga-fingerprint",
+      "description": "Read-only pattern report. No generation, no state mutation outside reports.",
+      "category": "validator"
+    },
+    {
+      "name": "naga-learning",
+      "source": "./plugins/naga-learning",
+      "description": "PreCompact hook persists per-(pattern-class x target-domain) fidelity posterior via N5 Gauss Accumulation. The single hook in the plugin.",
+      "category": "validator"
+    }
+  ]
+}
