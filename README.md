@@ -255,6 +255,10 @@ applied across all plugins.
 - **Benimatic** — Twilight Forest (2011) — the Minecraft mod whose Naga boss gave this plugin its name and metaphor.
 - **@enchanted-plugins** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech, Djinn, Gorgon — for the canonical template, the event-bus pattern, and the ecosystem contract.
 
+## Versioning & release cadence
+
+Naga follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Breaking changes to engine signatures, event payloads, or the honest-numbers tuple shape bump the major version. Additive engines or sub-plugins bump the minor. Bug fixes bump the patch. See [CHANGELOG.md](CHANGELOG.md) for the running history.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
