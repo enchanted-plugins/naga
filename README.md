@@ -269,6 +269,20 @@ Pull requests welcome. Key rules:
 - Honest-numbers contract on every artifact: no N, no handoff. The N4 cosine score must combine N1 + N2 + N3 vectors; single-axis fidelity is rejected.
 - Stdlib only — no `pip install`, no tree_sitter, no jinja2. Run `python -m unittest discover tests/` before opening the PR.
 
+## Citation
+
+See [CITATION.cff](CITATION.cff) for machine-readable citation metadata.
+
+```
+@software{naga_2026,
+  title   = {Naga: Source-as-spec pattern replication for Claude Code},
+  author  = {{enchanted-plugins}},
+  year    = {2026},
+  url     = {https://github.com/enchanted-plugins/naga},
+  license = {MIT}
+}
+```
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
