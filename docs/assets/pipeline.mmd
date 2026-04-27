@@ -1,0 +1,52 @@
+---
+title: Naga six-subplugin architecture
+config:
+  look: neo
+  theme: dark
+  flowchart:
+    curve: basis
+    padding: 18
+    nodeSpacing: 44
+    rankSpacing: 54
+    htmlLabels: true
+---
+flowchart TB
+    Source(["INPUT · SOURCE ARTIFACT<br/><small>file path passed to /naga:observe or /naga:match</small>"])
+
+    subgraph Observe["SUB-PLUGIN 01 · NAGA-OBSERVE · N1 + N2"]
+        direction LR
+        ast["N1 ZHANG-SHASHA<br/>tree edit distance<br/><small>postorder DP</small>"] --> tfidf["N2 SPÄRCK JONES<br/>TF-IDF tokens<br/><small>identifier + comment + structure</small>"] --> fp["FINGERPRINT<br/>state/patterns/&lt;hash&gt;.json<br/><small>atomic · reusable</small>"]
+    end
+
+    subgraph Shift["SUB-PLUGIN 02 · NAGA-SHIFT · N1 + N2 + N3 + N4"]
+        direction LR
+        emit["EMIT CHUNK<br/>via Sonnet shaper"] --> n3["N3 LEVENSHTEIN<br/>naming distance<br/><small>per identifier pair</small>"] --> n4["N4 COSINE<br/>fidelity score<br/><small>(score, ci, N)</small>"] --> gate{"≥ N5 threshold?"}
+        gate -->|no| emit
+        gate -->|yes| keep["KEEP<br/>append to target"]
+    end
+
+    subgraph Auxiliary["SUB-PLUGINS 03 · 04 · 05 · NAGA-VALIDATE · NAGA-CROSS-REPO · NAGA-FINGERPRINT"]
+        direction LR
+        val["/naga:validate<br/>N1 + N4<br/><small>fidelity report</small>"] --> xr["/naga:match-across<br/>cross-repo<br/><small>sibling resolution</small>"] --> fp_skill["/naga:fingerprint<br/>read-only<br/><small>N2 + N3 report</small>"]
+    end
+
+    subgraph Learning["SUB-PLUGIN 06 · NAGA-LEARNING · N5 · SINGLE HOOK"]
+        direction LR
+        precompact["PreCompact"] --> drift["DRIFT<br/>vs prior fidelity"] --> post["N5 GAUSS<br/>POSTERIOR<br/><small>(pattern-class × target-domain)</small>"]
+    end
+
+    subgraph Bus["OUTPUT · ENCHANTED-MCP BUS · naga.* EVENTS · HONEST-NUMBERS ENFORCED"]
+        direction LR
+        evt1["naga.pattern.<br/>fingerprinted"] --> evt2["naga.artifact.<br/>generated<br/><small>(score, ci, N)</small>"] --> evt3["naga.fidelity.<br/>measured"] --> evt4["naga.pattern.<br/>refreshed"]
+    end
+
+    Peers["PEER PLUGINS ENRICH (OPTIONAL)<br/><small>Gorgon → snapshot.captured (target-domain hint) · Wixie → prompt.crafted (seed propagation)</small>"]
+
+    Source --> Observe
+    Source --> Shift
+    Observe --> Shift
+    Shift --> Auxiliary
+    Auxiliary --> Bus
+    Shift --> Learning
+    Learning --> Bus
+    Peers -.-> Shift
