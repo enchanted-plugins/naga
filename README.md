@@ -243,6 +243,18 @@ applied across all plugins.
 
 `docs/architecture/` — Phase 2 will host auto-generated mermaid diagrams.
 
+## Acknowledgments
+
+- **Zhang K. and Shasha D.** — the 1989 tree edit distance algorithm underpinning N1.
+- **Spärck Jones K.** — the 1972 TF-IDF formulation underpinning N2.
+- **Levenshtein V.I.** — the 1966 edit-distance metric underpinning N3.
+- **Salton G., Wong A., Yang C.S.** — the 1975 vector space model + cosine similarity underpinning N4.
+- **Gauss C.F.** — the 1809 least-squares foundation underpinning N5.
+- **Bird et al.** — Copilot evaluations (2022) — documented the cross-file consistency weak axis that motivates N1's multi-file fingerprint.
+- **Anthropic + OpenAI few-shot ablation literature** — documented why source-specific minority patterns wash out under prior-averaging few-shot prompting; motivates Naga's deterministic-constraint design.
+- **Benimatic** — Twilight Forest (2011) — the Minecraft mod whose Naga boss gave this plugin its name and metaphor.
+- **@enchanted-plugins** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech, Djinn, Gorgon — for the canonical template, the event-bus pattern, and the ecosystem contract.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
