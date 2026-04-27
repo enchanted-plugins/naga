@@ -154,6 +154,37 @@ The single PreCompact hook persists the cross-session posterior; every other
 sub-plugin fires from a slash command. Do NOT add SessionStart, PostToolUse,
 or UserPromptSubmit bindings — the 1-hook count is intentional.
 
+## What You Get Per Match
+
+Every `/naga:observe` extracts a fingerprint and persists it; every `/naga:match` generates a target artifact under per-chunk N4 fidelity gating; every `PreCompact` folds the per-(pattern-class × target-domain) fidelity envelope into the cross-session posterior. All writes go through the atomic `shared/scripts/state_io.atomic_write_json` helper.
+
+```
+plugins/naga-observe/state/patterns/
+└── <fingerprint-hash>.json    N1 shape vector + N2 TF-IDF terms + N3 naming convention
+
+plugins/naga-shift/state/
+└── last-match.json            most recent /naga:match (source, target, fidelity, ci, N)
+
+plugins/naga-validate/state/
+└── last-validation.json       most recent /naga:validate output
+
+plugins/naga-fingerprint/state/
+└── last-report.json           most recent /naga:fingerprint output
+
+plugins/naga-learning/state/
+├── posteriors.json            per-(pattern-class × target-domain) fidelity posterior (N5 EMA)
+└── learnings.jsonl            per-match append-only fidelity summary (backtesting source)
+```
+
+Events published on the `naga.*` namespace (Phase-1 file-tail fallback via shared `publish.py`):
+
+- `naga.pattern.fingerprinted` — `{source_path, fingerprint_hash, n1_signature, n2_terms, captured_at}`
+- `naga.artifact.generated` — `{source_path, target_path, fidelity_score, ci_low, ci_high, N}`
+- `naga.fidelity.measured` — `{generated_path, source_pattern, score, ci_low, ci_high, N}`
+- `naga.pattern.refreshed` — `{pattern_class, n_observations, posterior}`
+
+Optional subscriptions (Phase-2 enrichment): `gorgon.snapshot.captured` (target-domain hint), `wixie.prompt.crafted` (propagate Wixie-engineered seeds across siblings).
+
 ## The Science Behind Naga
 
 | ID | Name                                  | Reference                                                                              |
