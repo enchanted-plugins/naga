@@ -19,6 +19,12 @@ Observes an existing artifact's structural and stylistic fingerprint and generat
 >
 > Time: deterministic fingerprint, bounded generation loop. Developer effort: invoke one slash command.
 
+## TL;DR
+
+**In plain English:** When you ask an AI to write a new file "in the same style as this existing one," it averages your example against everything it was trained on and gives you something almost-right — close enough to accept, different enough to break your conventions.
+
+**Technically:** N1 Zhang-Shasha tree edit distance extracts the postorder AST shape signature from the source artifact; N2 Spaerck Jones TF-IDF captures the identifier/comment/structure token fingerprint; both are stored atomically in `state/patterns/<hash>.json`. N4 Salton-Wong-Yang cosine fidelity is scored per generated chunk against the fingerprint, and chunks below the per-(pattern-class × target-domain) N5 Gauss posterior threshold are rewritten once then dropped — validated output ships with `(score, ci_low, ci_high, N)` from a bootstrap 95% CI.
+
 ---
 
 ## Origin
