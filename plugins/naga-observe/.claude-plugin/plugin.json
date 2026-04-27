@@ -1,0 +1,21 @@
+{
+  "name": "naga-observe",
+  "description": "Extracts the pattern fingerprint from a source artifact via N1 Zhang-Shasha tree edit signature + N2 Spaerck Jones TF-IDF over identifier/comment/structure tokens. Persists state/patterns/<hash>.json. Use when the user runs /naga:observe.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "pattern",
+    "fingerprint",
+    "ast",
+    "tfidf"
+  ],
+  "skills": [
+    "./skills/naga-observe/"
+  ],
+  "commands": [
+    "./commands/observe.md"
+  ]
+}
