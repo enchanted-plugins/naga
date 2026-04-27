@@ -67,6 +67,21 @@ Not for:
 ## How It Works
 
 On `/naga:observe <source>`, **naga-observe** parses the source artifact via
+
+<p align="center">
+  <a href="docs/assets/pipeline.mmd" title="View pipeline source (Mermaid)">
+    <img src="docs/assets/pipeline.svg"
+         alt="Naga six-subplugin architecture blueprint — source artifact input flowing through naga-observe (N1 Zhang-Shasha tree edit distance + N2 Spärck Jones TF-IDF fingerprint extraction), naga-shift (emit-score-rewrite loop with N3 Levenshtein naming distance and N4 Salton-Wong-Yang cosine fidelity gating against N5 per-class threshold), three auxiliary skill sub-plugins (naga-validate, naga-cross-repo, naga-fingerprint), and naga-learning (single PreCompact hook updating N5 Gauss per-(pattern-class × target-domain) fidelity posterior); publishing four naga.* events on the enchanted-mcp bus with optional peer-plugin enrichment from Gorgon and Wixie"
+         width="100%" style="max-width: 1100px;">
+  </a>
+</p>
+
+<sub align="center">
+
+Source: [docs/assets/pipeline.mmd](docs/assets/pipeline.mmd) · Regeneration command in [docs/assets/README.md](docs/assets/README.md).
+
+</sub>
+
 stdlib `ast`, runs **N1 Zhang-Shasha tree edit distance** against an empty
 AST to derive the postorder shape signature, runs **N2 Spaerck Jones TF-IDF**
 over identifier/comment/structure tokens, and persists the resulting
@@ -110,6 +125,21 @@ Every `/naga:validate` row and every `naga.fidelity.measured` event carries `(sc
 ## The Full Lifecycle
 
 Naga is **skill-invoked by design** — 1 hook (PreCompact persistence) + 5 skill commands. No phase runs continuously in the background.
+
+<p align="center">
+  <a href="docs/assets/lifecycle.mmd" title="View lifecycle source (Mermaid)">
+    <img src="docs/assets/lifecycle.svg"
+         alt="Naga skill-invoked lifecycle blueprint — developer triggers one of five slash commands (/naga:observe extract fingerprint via N1 + N2, /naga:fingerprint read-only N2 + N3 report, /naga:match generate target via N1+N2+N3+N4 emit-score-rewrite loop, /naga:match-across cross-repo path resolution, /naga:validate score fidelity via N1 + N4); persisted artifacts include state/patterns/<hash>.json fingerprint and target output; single PreCompact hook fires naga-learning to update N5 per-(pattern-class × target-domain) Gauss posterior, refining next-session per-class thresholds"
+         width="100%" style="max-width: 1100px;">
+  </a>
+</p>
+
+<sub align="center">
+
+Source: [docs/assets/lifecycle.mmd](docs/assets/lifecycle.mmd) · Regeneration command in [docs/assets/README.md](docs/assets/README.md).
+
+</sub>
+
 
 | Phase | Event or Skill | Sub-plugin | Engines | Output |
 |-------|----------------|------------|---------|--------|
