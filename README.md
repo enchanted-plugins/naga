@@ -185,6 +185,10 @@ Events published on the `naga.*` namespace (Phase-1 file-tail fallback via share
 
 Optional subscriptions (Phase-2 enrichment): `gorgon.snapshot.captured` (target-domain hint), `wixie.prompt.crafted` (propagate Wixie-engineered seeds across siblings).
 
+## Roadmap
+
+Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](https://github.com/enchanted-plugins/wixie/blob/main/docs/ecosystem.md). For upcoming work specific to Naga, see issues tagged [roadmap](https://github.com/enchanted-plugins/naga/labels/roadmap).
+
 ## The Science Behind Naga
 
 | ID | Name                                  | Reference                                                                              |
