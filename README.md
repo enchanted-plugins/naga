@@ -33,47 +33,6 @@ per-class threshold.
 
 The question this plugin answers: *Make something new that looks like this existing thing.*
 
-## How It Works
-
-On `/naga:observe <source>`, **naga-observe** parses the source artifact via
-stdlib `ast`, runs **N1 Zhang-Shasha tree edit distance** against an empty
-AST to derive the postorder shape signature, runs **N2 Spaerck Jones TF-IDF**
-over identifier/comment/structure tokens, and persists the resulting
-fingerprint atomically to `plugins/naga-observe/state/patterns/<hash>.json`.
-
-On `/naga:match <source> <target>`, **naga-shift** loads the fingerprint,
-reads the per-(pattern-class x target-domain) p10 threshold from the N5
-posterior, and dispatches the **naga-shaper** Sonnet agent to emit chunk-by-
-chunk. Each chunk is scored via **N4 Salton-Wong-Yang cosine** against the
-source vector; chunks below threshold are rewritten once, then dropped.
-
-On `/naga:validate <new> <source>`, **naga-validate** re-scores cold via
-N1 + N4 and reports `(score, ci_low, ci_high, N)` with bootstrap 95% CI.
-
-On `PreCompact`, **naga-learning** folds new fidelity observations into the
-per-(pattern-class x target-domain) posterior via **N5 Gauss Accumulation**.
-This is the single hook binding in Naga.
-
-## Install
-
-```
-/plugin marketplace add enchanted-plugins/naga
-/plugin install full@naga
-```
-
-Or cherry-pick: `/plugin install naga-fingerprint@naga`.
-
-## Quickstart
-
-```
-/plugin install full@naga
-/naga:observe shared/conduct/discipline.md
-/naga:match  shared/conduct/discipline.md  shared/conduct/discipline-mirror.md
-```
-
-Expected: a fingerprint JSON, then a generated mirror artifact with
-`(score, ci_low, ci_high, N)` printed and persisted.
-
 ## Who this is for
 
 - Developers propagating idioms across sibling modules — when `shared/conduct/discipline.md` is the gold standard and the next five conduct modules must match its shape, vocabulary, and naming convention exactly.
@@ -98,6 +57,27 @@ Not for:
 - [Agent Conduct (13 Modules)](#agent-conduct-13-modules)
 - [Architecture](#architecture)
 - [License](#license)
+
+## How It Works
+
+On `/naga:observe <source>`, **naga-observe** parses the source artifact via
+stdlib `ast`, runs **N1 Zhang-Shasha tree edit distance** against an empty
+AST to derive the postorder shape signature, runs **N2 Spaerck Jones TF-IDF**
+over identifier/comment/structure tokens, and persists the resulting
+fingerprint atomically to `plugins/naga-observe/state/patterns/<hash>.json`.
+
+On `/naga:match <source> <target>`, **naga-shift** loads the fingerprint,
+reads the per-(pattern-class x target-domain) p10 threshold from the N5
+posterior, and dispatches the **naga-shaper** Sonnet agent to emit chunk-by-
+chunk. Each chunk is scored via **N4 Salton-Wong-Yang cosine** against the
+source vector; chunks below threshold are rewritten once, then dropped.
+
+On `/naga:validate <new> <source>`, **naga-validate** re-scores cold via
+N1 + N4 and reports `(score, ci_low, ci_high, N)` with bootstrap 95% CI.
+
+On `PreCompact`, **naga-learning** folds new fidelity observations into the
+per-(pattern-class x target-domain) posterior via **N5 Gauss Accumulation**.
+This is the single hook binding in Naga.
 
 ## What Makes Naga Different
 
@@ -135,6 +115,26 @@ Naga is **skill-invoked by design** — 1 hook (PreCompact persistence) + 5 skil
 | Learn | PreCompact | `naga-learning` | N5 | `state/posterior.json`, `state/learnings.jsonl` |
 
 The PreCompact hook is the single hook binding in Naga and is intentional — do not add SessionStart, PostToolUse, or UserPromptSubmit bindings.
+
+## Install
+
+```
+/plugin marketplace add enchanted-plugins/naga
+/plugin install full@naga
+```
+
+Or cherry-pick: `/plugin install naga-fingerprint@naga`.
+
+## Quickstart
+
+```
+/plugin install full@naga
+/naga:observe shared/conduct/discipline.md
+/naga:match  shared/conduct/discipline.md  shared/conduct/discipline-mirror.md
+```
+
+Expected: a fingerprint JSON, then a generated mirror artifact with
+`(score, ci_low, ci_high, N)` printed and persisted.
 
 ## 7 Plugins, 3 Agents
 
