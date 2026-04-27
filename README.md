@@ -23,8 +23,7 @@ Observes an existing artifact's structural and stylistic fingerprint and generat
 
 ## Origin
 
-Naga takes its name from **Minecraft mod: Twilight Forest** (Benimatic, 2011)
-— the verdant serpent boss whose long coiled body shifts to match the
+**Naga** takes its name from **Twilight Forest** — the verdant serpent boss whose long coiled body shifts to match the
 hedge-maze terrain of its lair. Scale-pattern, segment-length, and
 turn-radius all conform to the surrounding shape. That is literally the
 function of this plugin: observe a source artifact's shape, vocabulary, and
