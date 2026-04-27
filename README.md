@@ -259,6 +259,16 @@ applied across all plugins.
 
 Naga follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Breaking changes to engine signatures, event payloads, or the honest-numbers tuple shape bump the major version. Additive engines or sub-plugins bump the minor. Bug fixes bump the patch. See [CHANGELOG.md](CHANGELOG.md) for the running history.
 
+## Contributing
+
+Pull requests welcome. Key rules:
+
+- Do not edit `shared/conduct/*.md` in a Naga PR; raise the change in the [schematic](https://github.com/enchanted-plugins/schematic) repo so it propagates to every sibling.
+- Every new engine needs an Author-Year docstring citation and a `docs/science/README.md` section.
+- The single PreCompact hook opens with the subagent-loop guard and exits 0 fail-open. Naga is skill-invoked by design — do not add SessionStart, PostToolUse, or UserPromptSubmit hooks.
+- Honest-numbers contract on every artifact: no N, no handoff. The N4 cosine score must combine N1 + N2 + N3 vectors; single-axis fidelity is rejected.
+- Stdlib only — no `pip install`, no tree_sitter, no jinja2. Run `python -m unittest discover tests/` before opening the PR.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
