@@ -1,0 +1,17 @@
+{
+  "description": "naga-learning hooks — advisory-only, fail-open. Update N5 fidelity-drift posterior on PreCompact. The single hook in Naga.",
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-compact/persist-posterior.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

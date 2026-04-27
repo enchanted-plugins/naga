@@ -1,0 +1,14 @@
+{
+  "name": "naga-learning",
+  "description": "Persists per-(pattern-class x target-domain) fidelity posterior on PreCompact via N5 Gauss Accumulation. The single hook binding in Naga — the plugin is skill-invoked by design like Wixie.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "gauss-accumulation",
+    "fidelity-drift",
+    "learning"
+  ]
+}
