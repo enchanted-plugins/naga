@@ -1,0 +1,25 @@
+---
+title: Naga skill-invoked lifecycle
+config:
+  look: neo
+  theme: dark
+  flowchart:
+    curve: basis
+    padding: 18
+    nodeSpacing: 44
+    rankSpacing: 54
+---
+flowchart LR
+    Dev(["developer invokes skill"]) --> Cmd{"which command?"}
+    Cmd -->|/naga:observe| Obs["naga-observe<br/>N1 + N2<br/><small>extract fingerprint</small>"]
+    Cmd -->|/naga:fingerprint| Fp["naga-fingerprint<br/>N2 + N3<br/><small>read-only report</small>"]
+    Cmd -->|/naga:match| Sh["naga-shift<br/>N1+N2+N3+N4 loop<br/><small>per-chunk fidelity gate</small>"]
+    Cmd -->|/naga:match-across| Xr["naga-cross-repo<br/>cross-repo path resolution"]
+    Cmd -->|/naga:validate| Val["naga-validate<br/>N1 + N4<br/><small>fidelity score</small>"]
+    Obs --> State[("state/patterns/&lt;hash&gt;.json")]
+    Sh --> State
+    Sh --> Out([target artifact written])
+    Val --> Out
+    State --> PC["PreCompact<br/><small>only hook</small>"]
+    PC --> Learn["naga-learning<br/>N5 posterior update"]
+    Learn --> Done(["next session<br/>refined per-class threshold"])
