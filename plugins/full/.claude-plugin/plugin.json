@@ -1,0 +1,21 @@
+{
+  "name": "full",
+  "description": "Naga meta-plugin. One install pulls in all six Naga sub-plugins via dependency resolution: naga-observe, naga-shift, naga-validate, naga-cross-repo, naga-fingerprint, naga-learning.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "naga",
+    "meta-plugin"
+  ],
+  "dependencies": [
+    "naga-observe",
+    "naga-shift",
+    "naga-validate",
+    "naga-cross-repo",
+    "naga-fingerprint",
+    "naga-learning"
+  ]
+}
